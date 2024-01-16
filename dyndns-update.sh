@@ -6,7 +6,7 @@ domains=('example.com' 'example.org')
 
 
 
-IPv4=$(dig @9.9.99 "$myfritzdomain" A +short)
+IPv4=$(dig @9.9.9.9 "$myfritzdomain" A +short)
 exitcode4=$?
 
 IPv6=$(dig @9.9.9.9 "$myfritzdomain" AAAA +short)
