@@ -13,7 +13,7 @@ IPv6=$(dig @9.9.9.9 "$myfritzdomain" AAAA +short)
 exitcode6=$?
 
 if [ $((exitcode4 + exitcode6)) -ne 0 ]; then
-    echo "Fehler bei der Ausführung von dig"
+    echo "Error while running dig"
     exit 1
 fi
 
