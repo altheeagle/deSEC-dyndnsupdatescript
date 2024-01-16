@@ -6,9 +6,16 @@ domains=('example.com' 'example.org')
 
 
 
-IPv4=$(dig @9.9.9.9 "$myfritzdomain" A +short)
+IPv4=$(dig @9.9.99 "$myfritzdomain" A +short)
+exitcode4=$?
 
 IPv6=$(dig @9.9.9.9 "$myfritzdomain" AAAA +short)
+exitcode6=$?
+
+if [ $((exitcode4 + exitcode6)) -ne 0 ]; then
+    echo "Fehler bei der Ausführung von dig"
+    exit 1
+fi
 
 if [ ! -e /tmp/dyndnsv4 ]; then
     echo $IPv4 > /tmp/dyndnsv4
