@@ -18,11 +18,11 @@ if [ $((exitcode4 + exitcode6)) -ne 0 ]; then
 fi
 
 if [ ! -e /tmp/dyndnsv4 ]; then
-    echo $IPv4 > /tmp/dyndnsv4
+    echo new > /tmp/dyndnsv4
 fi
 
 if [ ! -e /tmp/dyndnsv6 ]; then
-    echo $IPv6 > /tmp/dyndnsv6
+    echo new > /tmp/dyndnsv6
 fi
 
 
