@@ -13,7 +13,15 @@ IPv6=$(dig @9.9.9.9 "$myfritzdomain" AAAA +short)
 exitcode6=$?
 
 if [ $((exitcode4 + exitcode6)) -ne 0 ]; then
-    echo "Error while running dig"
+    echo "$(date +"%d.%m.%Y %H:%M") An Error occurred while running dig"
+    if [ "$exitcode4" -ne 0 ]; then
+        echo "$(date +"%d.%m.%Y %H:%M") Error getting IPv4-Address for $myfritzdomain:" 
+        echo $IPv4;
+    fi
+    if [ "$exitcode6" -ne 0 ]; then
+        echo "$(date +"%d.%m.%Y %H:%M") Error getting IPv6-Address for $myfritzdomain:" 
+        echo $IPv6;
+    fi
     exit 1
 fi
 
@@ -44,7 +52,7 @@ if [ $(cat /tmp/dyndnsv4) != "$IPv4" ] || [ $(cat /tmp/dyndnsv6) != "$IPv6" ]; t
             if [ $StatusCode -eq 200 ]; then
                 echo "$(date +"%d.%m.%Y %H:%M") Updating the domain $domain was successful (Statuscode: $StatusCode)"
             else
-                echo "$(date +"%d.%m.%Y %H:%M") Updating the domain $domain was not successful (Statuscode: $StatusCode)"
+                echo "$(date +"%d.%m.%Y %H:%M") Error while Updating the domain $domain (Statuscode: $StatusCode)"
             fi
 
     done
